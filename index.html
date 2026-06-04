@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern History VVIP Test</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+}
+
+.question{
+    margin-bottom:25px;
+    padding:15px;
+    border-left:5px solid #3498db;
+    background:#fafafa;
+}
+
+.question p{
+    font-weight:bold;
+}
+
+.options label{
+    display:block;
+    margin:6px 0;
+    cursor:pointer;
+}
+
+button{
+    display:block;
+    margin:30px auto;
+    padding:12px 30px;
+    font-size:18px;
+    border:none;
+    background:#27ae60;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#219150;
+}
+
+#result{
+    margin-top:30px;
+    padding:20px;
+    background:#eef9ee;
+    border:1px solid #27ae60;
+    display:none;
+}
+
+.correct{
+    color:green;
+    font-weight:bold;
+}
+
+.wrong{
+    color:red;
+    font-weight:bold;
+}
+</style>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+<script>
+  window.addEventListener("load", function () {
+      alert("this website is owned by shresth3125");
+  });
+  </script>
+
+<body>
+
+<div class="container">
+
+<h1>Modern History VVIP Test (30 Questions)</h1>
+
+<form id="quizForm"></form>
+
+<div class="rainbow-button-wrapper">
+  <button type="button" id="submitBtn" onclick="submitQuiz()">
+      🚀 Want to Submit Test Samridhi? Click here 
+  </button>
+</div>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+
+const questions = [
+{
+q:"1. With reference to the Bengal Famine of 1770–72, consider the following: <br><br>1. It was preceded by two successive crop failures.<br>2. The East India Company reduced land revenue demands during the crisis.<br>3. Nearly one-third of Bengal's population is estimated to have perished.<br><br>Which statements are correct?",
+type:"single",
+options:["1 only","1 and 3 only","2 and 3 only","1, 2 and 3"],
+answer:"1 and 3 only"
+},
+{
+q:"2. Which one of the following best explains why Bengal was described as 'the paradise of the earth' by Robert Clive?",
+type:"single",
+options:["Its military strength against European powers","Its strategic position for maritime trade alone","Its immense wealth and revenue potential","Its religious and cultural diversity"],
+answer:"Its immense wealth and revenue potential"
+},
+{
+q:"3. How many pairs are correctly matched? Dadabhai Naoroji–Poverty and Un-British Rule in India; R.C. Dutt–Economic History of India; Utsa Patnaik–Estimated $45 trillion drain of wealth.",
+type:"single",
+options:["One only","Two only","All three","None"],
+answer:"All three"
+},
+{
+q:"4. The painting 'The East Offering Its Riches to Britannia' was intended primarily to depict:",
+type:"single",
+options:["Equality between Britain and India","Mutual cultural exchange","Britain's superior position over colonial possessions","India's military partnership with Britain"],
+answer:"Britain's superior position over colonial possessions"
+},
+{
+q:"5. Which was NOT listed as a mechanism through which wealth was extracted from India?",
+type:"single",
+options:["Charging Indians for colonial wars","Control over exchange rates","Heavy taxation of farmers and traders","Permanent prohibition on indigenous banking"],
+answer:"Permanent prohibition on indigenous banking"
+},
+{
+q:"6. Regarding pre-colonial Indian textiles, which are correct?",
+type:"single",
+options:["1 and 2 only","2 and 3 only","1 only","1, 2 and 3"],
+answer:"1 and 2 only"
+},
+{
+q:"7. The statement 'The bones of the cotton weavers are bleaching the plains of India' was attributed to:",
+type:"single",
+options:["Lord Lytton","William Bentinck","Charles Metcalfe","Thomas Macaulay"],
+answer:"William Bentinck"
+},
+{
+q:"8. India's share of world GDP declined from more than:",
+type:"single",
+options:["40% to 10%","30% to 8%","25% to about 5%","20% to 2%"],
+answer:"25% to about 5%"
+},
+{
+q:"9. Which was NOT a feature of pre-colonial local governance?",
+type:"single",
+options:["Irrigation management","Resolution of disputes","Community decision-making","Universal adult franchise"],
+answer:"Universal adult franchise"
+},
+{
+q:"10. Charles Metcalfe described village communities as:",
+type:"single",
+options:["Centres of rebellion","Little republics","Agricultural corporations","Ancient municipalities"],
+answer:"Little republics"
+},
+{
+q:"11. Regarding colonial courts, which statements are correct?",
+type:"single",
+options:["1 only","1 and 3 only","2 and 3 only","1, 2 and 3"],
+answer:"1 and 3 only"
+},
+{
+q:"12. Which was NOT part of Macaulay's educational vision?",
+type:"single",
+options:["Promotion of English education","Creation of clerical manpower","Preservation of traditional knowledge systems","Formation of Indians English in taste and intellect"],
+answer:"Preservation of traditional knowledge systems"
+},
+{
+q:"13. Bengal and Bihar alone possessed approximately:",
+type:"single",
+options:["10,000–15,000 village schools","50,000–75,000 village schools","100,000–150,000 village schools","200,000–250,000 village schools"],
+answer:"100,000–150,000 village schools"
+},
+{
+q:"14. Which best captures the economic transformation under British rule?",
+type:"single",
+options:["Manufacturing to manufacturing-intensive economy","Self-sufficient economy to colonial supply chain","Agrarian economy to socialist economy","Mercantilist economy to capitalist democracy"],
+answer:"Self-sufficient economy to colonial supply chain"
+},
+{
+q:"15. Regarding railways under British rule, which statement is correct?",
+type:"single",
+options:["They were financed mainly by British taxpayers.","They followed existing Indian trade routes.","Their primary purpose was movement of raw materials to ports.","They were designed mainly for famine relief."],
+answer:"Their primary purpose was movement of raw materials to ports."
+},
+{
+q:"16. The Sannyasi-Fakir Rebellion was significant because:",
+type:"single",
+options:["It occurred after the Indigo Revolt.","It was inspired by Anandamath.","Hindu ascetics and Muslim fakirs joined forces.","It was led by Sidhu and Kanhu Murmu."],
+answer:"Hindu ascetics and Muslim fakirs joined forces."
+},
+{
+q:"17. Anandamath and Vande Mataram are linked to:",
+type:"single",
+options:["Kol Uprising","Sannyasi-Fakir Rebellion","Indigo Revolt","Vellore Mutiny"],
+answer:"Sannyasi-Fakir Rebellion"
+},
+{
+q:"18. Which was NOT mentioned as a British policy affecting tribal communities?",
+type:"single",
+options:["Restricting access to forests","Imposition of cash taxes","Replacing tribal councils with British law","Granting autonomous tribal republics"],
+answer:"Granting autonomous tribal republics"
+},
+{
+q:"19. The Kol Uprising (1831–32) was primarily triggered by:",
+type:"single",
+options:["Forced indigo cultivation","New uniform regulations","Land policies favouring outsiders","Greased cartridges"],
+answer:"Land policies favouring outsiders"
+},
+{
+q:"20. The Santhal Rebellion (1855–56) was led by:",
+type:"single",
+options:["Birsa Munda and Tilka Manjhi","Sidhu Murmu and Kanhu Murmu","Nana Saheb and Tatia Tope","Kunwar Singh and Azimullah Khan"],
+answer:"Sidhu Murmu and Kanhu Murmu"
+},
+{
+q:"21. Regarding the Indigo Revolt, which statements are correct?",
+type:"single",
+options:["1 and 2 only","2 and 3 only","1 and 3 only","1, 2 and 3"],
+answer:"1 and 2 only"
+},
+{
+q:"22. Which event immediately preceded the wider spread of the Revolt of 1857 according to the PDF narrative?",
+type:"single",
+options:["Annexation of Awadh","Mangal Pandey's execution after attacking British officers","Death of Rani Lakshmibai","Capture of Delhi by British troops"],
+answer:"Mangal Pandey's execution after attacking British officers"
+},
+{
+q:"23. At Meerut, the sepoys:",
+type:"single",
+options:["Declared Nana Saheb emperor","Marched to Calcutta","Killed British officers and moved toward Delhi","Allied with the French"],
+answer:"Killed British officers and moved toward Delhi"
+},
+{
+q:"24. According to the PDF, the Great Rebellion of 1857 failed primarily because:",
+type:"single",
+options:["Lack of foreign support","Unified British-Indian alliance against rebels","Lack of unified command and strategy among rebels","Absence of participation by peasants"],
+answer:"Lack of unified command and strategy among rebels"
+},
+{
+q:"25. Which occurred after the suppression of the Revolt of 1857?",
+type:"single",
+options:["Introduction of the Cartaz system","Direct transfer of power from Company to Crown","Beginning of Subsidiary Alliance","Battle of Colachel"],
+answer:"Direct transfer of power from Company to Crown"
+}
+];
+
+
+const form = document.getElementById("quizForm");
+
+questions.forEach((item,index)=>{
+
+let html=`<div class="question">
+<p>${item.q}</p>
+<div class="options">`;
+
+item.options.forEach(opt=>{
+
+if(item.type==="single"){
+html+=`
+<label>
+<input type="radio" name="q${index}" value="${opt}">
+${opt}
+</label>`;
+}else{
+html+=`
+<label>
+<input type="checkbox" name="q${index}" value="${opt}">
+${opt}
+</label>`;
+}
+
+});
+
+html+=`</div></div>`;
+form.innerHTML+=html;
+});
+
+function arraysEqual(a,b){
+a=a.sort();
+b=b.sort();
+return JSON.stringify(a)===JSON.stringify(b);
+}
+function fireResultConfetti() {
+
+if (typeof confetti !== "function") return;
+
+const end = Date.now() + 3000;
+
+(function frame() {
+
+    confetti({
+        particleCount: 8,
+        angle: 60,
+        spread: 70,
+        origin: { x: 0 }
+    });
+
+    confetti({
+        particleCount: 8,
+        angle: 120,
+        spread: 70,
+        origin: { x: 1 }
+    });
+
+    if (Date.now() < end) {
+        requestAnimationFrame(frame);
+    }
+
+})();
+}
+function submitQuiz(){
+
+let score=0;
+let output="<h2>Result</h2>";
+
+questions.forEach((q,i)=>{
+
+if(q.type==="single"){
+
+let selected=document.querySelector(`input[name="q${i}"]:checked`);
+
+if(selected && selected.value===q.answer){
+score++;
+output+=`<p class="correct">Q${i+1}: Correct ✔</p>`;
+}else{
+output+=`<p class="wrong">Q${i+1}: Wrong ✘ | Correct Answer: ${q.answer}</p>`;
+}
+
+}else{
+
+let selected=[...document.querySelectorAll(`input[name="q${i}"]:checked`)]
+.map(x=>x.value);
+
+if(arraysEqual(selected,[...q.answer])){
+score++;
+output+=`<p class="correct">Q${i+1}: Correct ✔</p>`;
+}else{
+output+=`<p class="wrong">Q${i+1}: Wrong ✘ | Correct Answer: ${q.answer.join(", ")}</p>`;
+}
+}
+
+});
+
+let percentage=((score/questions.length)*100).toFixed(2);
+
+output+=`
+<hr>
+<h2>Score: ${score}/${questions.length}</h2>
+<h2>Percentage: ${percentage}%</h2>
+`;
+
+const result=document.getElementById("result");
+result.style.display="block";
+result.innerHTML=output;
+
+fireResultConfetti();
+
+window.scrollTo({
+top:document.body.scrollHeight,
+behavior:"smooth"
+});
+}
+
+</script>
+
+</body>
+</html>
